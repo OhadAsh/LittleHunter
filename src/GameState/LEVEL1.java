@@ -29,6 +29,7 @@ public class LEVEL1 extends GameState
 		tileMap.loadTiles("/Tilesets/grasstileset.gif");
 		tileMap.loadMap("/Maps/level1-1.map");
 		tileMap.setPosition(0, 0);
+		tileMap.setMapCam(1);
 		
 		bg = new Background("/Backgrounds/forrest1.gif", 0.5);
 		player = new Player(tileMap);

@@ -185,7 +185,8 @@ public class Player extends MapObject {
 		{
 			dy += fallspeed;
 			if(dy > 0 ) jump = false;
-			if(dy < 0 && !jump) dy += stopjumpstart;
+			//The longer you hold the jump button the higher you jump
+			//if(dy < 0 && !jump) dy += stopjumpstart;
 			if(dy > maxfallspeed) dy = maxfallspeed;
 		}
 	}

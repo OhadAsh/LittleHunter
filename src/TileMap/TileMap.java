@@ -23,7 +23,7 @@ public class TileMap
 	private int ymax;
 	
 	//Camera of map
-	private double tween;
+	private double MapCam;
 	
 	//Map 
 	private int [][] map;
@@ -51,7 +51,7 @@ public class TileMap
 		this.tileSize = tileSize;
 		numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
 		numColsToDraw = GamePanel.WIDTH / tileSize + 2;
-		tween = 0.07;
+		MapCam = 0.07;
 	}
 	
 	//Function that loads tile set of map to memory 
@@ -164,12 +164,15 @@ public class TileMap
 	//Set position on player entity
 	public void setPosition(double x, double y)
 	{
-		this.x = (x - this.x) * tween;
-		this.y = (y - this.y) * tween;
+		this.x += (x - this.x) * MapCam;
+		this.y += (y - this.y) * MapCam;
 		FixBounds();
 		colOffset = (int)-this.x / tileSize;
 		rowOffset  = (int)-this.y / tileSize;
 	}
+	
+	//Setter for MapCam
+	public void setMapCam(double d) { MapCam = d; }
 	
 	//Function that fixes the boundaries of visual map
 	private void FixBounds()
@@ -207,4 +210,5 @@ public class TileMap
 			}
 		}
 	}
+
 }

@@ -202,7 +202,7 @@ public abstract class MapObject {
 	public int getCWidth() { return (int)cwidth; }
 	public int getCHeight() { return (int)cheight; }
 	
-	//Function to set positions
+	//Setter for positions
 	public void setposition(double x,double y)
 	{
 		//Setters
@@ -210,6 +210,7 @@ public abstract class MapObject {
 		this.y = y;
 	}
 	
+	//Setter for vector
 	public void setVector(double dx, double dy)
 	{
 		//Setters
@@ -217,7 +218,7 @@ public abstract class MapObject {
 		this.dy = dy;
 	}
 	
-	//Set map position in order to know where to draw the charcter
+	//Set map position in order to know where to draw the character
 	public void setMapPosition() 
 	{
 		xmap = tilemap.getx();
