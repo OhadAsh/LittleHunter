@@ -30,7 +30,7 @@ public class LEVEL1 extends GameState
 		tileMap.loadMap("/Maps/level1-1.map");
 		tileMap.setPosition(0, 0);
 		
-		bg = new Background("/Backgrounds/forrest1.gif", 0.1);
+		bg = new Background("/Backgrounds/forrest1.gif", 0.5);
 		player = new Player(tileMap);
 		//Sets position of player in level 1
 		player.setposition(60 ,200);

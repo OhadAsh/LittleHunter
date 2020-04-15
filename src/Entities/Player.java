@@ -1,3 +1,4 @@
+//Player class last changed in 15/04/2020 20:10
 package Entities;
 
 import TileMap.*;
@@ -32,7 +33,7 @@ public class Player extends MapObject {
 	//Animation
 	private ArrayList<BufferedImage[]> sprites;
 	//Array of sprite littleHunter
-	private final int[] numFrames = { 4, 6, 3, 2, 3, 7};
+	private final int[] numFrames = { 4, 6, 3, 2, 8, 7};
 	private int curretAction;
 	//Animation actions, Enums for knowing which index of Animation were on
 	private static final int IDLE = 0;
@@ -94,7 +95,7 @@ public class Player extends MapObject {
 					else
 					{
 						bi[j] = spritesheet.getSubimage
-								((j * width) + 15, i* height, width, height);
+								((j * width) + 12, i* height, width, height);
 					}
 				}
 				sprites.add(bi);
@@ -109,7 +110,7 @@ public class Player extends MapObject {
 		//Sets player default animation IDLE
 		curretAction = IDLE;
 		animation.setFrames(sprites.get(IDLE));
-		animation.setDelay(200);
+		animation.setDelay(250);
 	}
 	
 	//Getters for player HUD 
@@ -204,8 +205,8 @@ public class Player extends MapObject {
 			{
 				curretAction = SWORD;
 				animation.setFrames(sprites.get(SWORD));
-				animation.setDelay(50);
-				width = 40;
+				animation.setDelay(35);
+				width = 42;
 			}
 		}
 		else if(firing)
@@ -214,8 +215,8 @@ public class Player extends MapObject {
 			{
 				curretAction = BOW;
 				animation.setFrames(sprites.get(BOW));
-				animation.setDelay(100);
-				width = 30;
+				animation.setDelay(35);
+				width = 42;
 			}
 		}
 		else if(dy > 0)
@@ -224,7 +225,7 @@ public class Player extends MapObject {
 			{
 				curretAction = FALIING;
 				animation.setFrames(sprites.get(FALIING));
-				animation.setDelay(100);
+				animation.setDelay(70);
 				width = 30;
 			}
 		}
@@ -234,7 +235,7 @@ public class Player extends MapObject {
 			{
 				curretAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
-				animation.setDelay(100);
+				animation.setDelay(200);
 				width = 30;
 			}
 		}
@@ -244,7 +245,7 @@ public class Player extends MapObject {
 			{
 				curretAction = WALKING;
 				animation.setFrames(sprites.get(WALKING));
-				animation.setDelay(40);
+				animation.setDelay(100);
 				width = 30;
 			}
 		}
