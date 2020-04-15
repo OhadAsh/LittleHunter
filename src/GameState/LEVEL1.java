@@ -63,8 +63,6 @@ public class LEVEL1 extends GameState
 	{
 		if(k == KeyEvent.VK_LEFT) player.SetLeft(true);
 		if(k == KeyEvent.VK_RIGHT) player.SetRight(true);
-		if(k == KeyEvent.VK_UP) player.SetUp(true);
-		if(k == KeyEvent.VK_DOWN) player.SetDown(true);
 		if(k == KeyEvent.VK_SPACE) player.SetJump(true);
 		if(k == KeyEvent.VK_S) player.SetAttacking();
 		if(k == KeyEvent.VK_D) player.SetFiring();
@@ -73,8 +71,6 @@ public class LEVEL1 extends GameState
 	{
 		if(k == KeyEvent.VK_LEFT) player.SetLeft(false);
 		if(k == KeyEvent.VK_RIGHT) player.SetRight(false);
-		if(k == KeyEvent.VK_UP) player.SetUp(false);
-		if(k == KeyEvent.VK_DOWN) player.SetDown(false);
 		if(k == KeyEvent.VK_SPACE) player.SetJump(false);
 	}
 }

@@ -107,7 +107,7 @@ public class Player extends MapObject {
 		
 		animation = new Animation();
 		//Sets player default animation IDLE
-		currAction = IDLE;
+		curretAction = IDLE;
 		animation.setFrames(sprites.get(IDLE));
 		animation.setDelay(200);
 	}
@@ -123,6 +123,7 @@ public class Player extends MapObject {
 	{
 		firing = true;
 	}
+	
 	public void SetAttacking()
 	{
 		Attack = true;
@@ -167,7 +168,7 @@ public class Player extends MapObject {
 			}
 		}
 		//cannot move while attacking
-		if((currAction == SWORD || currAction == BOW) &&
+		if((curretAction == SWORD || curretAction == BOW) &&
 		!(jump || fall))
 		{
 			dx = 0;
@@ -199,9 +200,9 @@ public class Player extends MapObject {
 		//SetAnimation
 		if(Attack)
 		{
-			if(currAction != SWORD)
+			if(curretAction != SWORD)
 			{
-				currAction = SWORD;
+				curretAction = SWORD;
 				animation.setFrames(sprites.get(SWORD));
 				animation.setDelay(50);
 				width = 40;
@@ -209,9 +210,9 @@ public class Player extends MapObject {
 		}
 		else if(firing)
 		{
-			if(currAction != BOW)
+			if(curretAction != BOW)
 			{
-				currAction = BOW;
+				curretAction = BOW;
 				animation.setFrames(sprites.get(BOW));
 				animation.setDelay(100);
 				width = 30;
@@ -219,9 +220,9 @@ public class Player extends MapObject {
 		}
 		else if(dy > 0)
 		{
-			if(currAction != FALIING)
+			if(curretAction != FALIING)
 			{
-				currAction = FALIING;
+				curretAction = FALIING;
 				animation.setFrames(sprites.get(FALIING));
 				animation.setDelay(100);
 				width = 30;
@@ -229,9 +230,9 @@ public class Player extends MapObject {
 		}
 		else if(dy < 0)
 		{
-			if(currAction != JUMPING)
+			if(curretAction != JUMPING)
 			{
-				currAction = JUMPING;
+				curretAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
 				animation.setDelay(100);
 				width = 30;
@@ -239,9 +240,9 @@ public class Player extends MapObject {
 		}
 		else if(left || right)
 		{
-			if(currAction != WALKING)
+			if(curretAction != WALKING)
 			{
-				currAction = WALKING;
+				curretAction = WALKING;
 				animation.setFrames(sprites.get(WALKING));
 				animation.setDelay(40);
 				width = 30;
@@ -249,9 +250,9 @@ public class Player extends MapObject {
 		}
 		else
 		{
-			if(currAction != IDLE)
+			if(curretAction != IDLE)
 			{
-				currAction = IDLE;
+				curretAction = IDLE;
 				animation.setFrames(sprites.get(IDLE));
 				animation.setDelay(200);
 				width = 30;
@@ -260,7 +261,7 @@ public class Player extends MapObject {
 		
 		animation.update();
 		//Set direction of player standing
-		if(currAction != SWORD && currAction != BOW)
+		if(curretAction != SWORD && curretAction != BOW)
 			if(right) faceright = true;
 			if(left) faceright = false;
 	}
@@ -289,4 +290,5 @@ public class Player extends MapObject {
 			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2 + width), (int)(y + ymap - height / 2), -width, height, null);
 		}
 	}
+
 }

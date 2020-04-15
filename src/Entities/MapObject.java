@@ -70,6 +70,8 @@ public abstract class MapObject {
 	{
 		tilemap = tm;
 		tileSize = tm.getTileSize();
+		animation = new Animation();
+		faceright = true;
 	}
 	
 	//Function of intersection between map object "collisions"
@@ -92,8 +94,8 @@ public abstract class MapObject {
 		int leftTile = (int)(x - cwidth / 2) / tileSize;
 		// -1 in order not to move to next column 
 		int rightTile = (int)(x + cwidth / 2 - 1) / tileSize;
-		int topTile = (int)(y - cwidth / 2) / tileSize;
-		int bottomTile = (int)(y + cwidth / 2 - 1) / tileSize;
+		int topTile = (int)(y - cheight / 2) / tileSize;
+		int bottomTile = (int)(y + cheight / 2 - 1) / tileSize;
 			
 		//Get types of tiles
 		int TL = tilemap.getType(topTile, leftTile);
@@ -112,7 +114,7 @@ public abstract class MapObject {
 	public void CheckTileMapColl()
 	{
 		currCol = (int)x / tileSize;
-		currCol = (int)y / tileSize;
+		currRow = (int)y / tileSize;
 		
 		//Destination positions
 		Xdestination = x + dx;
@@ -122,7 +124,7 @@ public abstract class MapObject {
 		Xtemp = x;
 		Ytemp = y;
 		
-		CalCorners (x, Ydestination);
+		CalCorners(x, Ydestination);
 		//Going up 
 		if(dy < 0)
 		{
@@ -152,7 +154,7 @@ public abstract class MapObject {
 				Ytemp += dy;
 			}
 		}
-		CalCorners (Xdestination, y);
+		CalCorners(Xdestination, y);
 		//Going left
 		if(dx < 0)
 		{

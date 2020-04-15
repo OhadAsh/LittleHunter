@@ -98,18 +98,18 @@ public class TileMap
 			width = numCols * tileSize;
 			height = numRows * tileSize;
 			
-			//default values for variebls 
+			//default values for variables 
 			xmin = GamePanel.WIDTH - width;
 			xmax = 0;
 			ymin = GamePanel.HEIGHT - height;
 			ymax = 0;
 			
 			//Read map file array
-			String delins = "\\s+";
+			String delims = "\\s+";
 			for(int row = 0; row < numRows; row++)
 			{
 				String line = br.readLine();
-				String[] tokens = line.split(delins);
+				String[] tokens = line.split(delims);
 				for(int col = 0; col < numCols; col++)
 				{
 					map[row][col] = Integer.parseInt(tokens[col]);
@@ -128,21 +128,29 @@ public class TileMap
 	{
 		return tileSize;
 	}
-	public int getx() 
+	public double getx() 
 	{
-		return (int)x;
+		return x;
 	}
-	public int gety() 
+	public double gety() 
 	{
-		return (int)y;
+		return y;
 	}
-	public int getwidth() 
+	public int GetWidth() 
 	{
 		return width;
 	}
-	public int getheight() 
+	public int GetHeight() 
 	{
 		return height;
+	}
+	public int GetNumRows() 
+	{
+		return numRows;
+	}
+	public int GetNumCols() 
+	{
+		return numCols;
 	}
 	//Get tile type
 	public int getType(int row,int col)
@@ -167,9 +175,9 @@ public class TileMap
 	private void FixBounds()
 	{
 		if(x < xmin) x = xmin;
-		if(x < xmax) x = xmax;
+		if(x > xmax) x = xmax;
 		if(y < ymin) y = ymin;
-		if(y < ymax) y = ymax;
+		if(y > ymax) y = ymax;
 	}
 	
 	//Function that draws the map
