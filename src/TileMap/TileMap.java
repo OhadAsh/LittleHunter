@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.ImageIO;
-
 import Main.GamePanel;
 
 
@@ -36,26 +35,28 @@ public class TileMap
 	//Tileset of Map
 	private BufferedImage tileset;
 	private int numTilesAcross;
-	//array of tiles that represents the tileset
+	//Array of tiles that represents the tileset
 	private Tile[][] tiles;
 	
 	
-	//drawing of the map in order not to draw all the map at once
+	//Drawing of the map in order not to draw all the map at once
 	private int rowOffset;
 	private int colOffset;
 	private int numRowsToDraw;
 	private int numColsToDraw;
 	
+	//Constructor of tilemap
 	public TileMap(int tileSize)
 	{
 		this.tileSize = tileSize;
+		//+2 for padding buffered map two blocks ahead
 		numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
 		numColsToDraw = GamePanel.WIDTH / tileSize + 2;
-		MapCam = 0.07;
+		MapCam = 0;
 	}
 	
 	//Function that loads tile set of map to memory 
-	public  void loadTiles(String s)
+	public void loadTiles(String s)
 	{
 		try {
 			tileset = ImageIO.read(getClass().getResource(s));

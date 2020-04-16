@@ -11,7 +11,7 @@ public class GameStateManager
 		private ArrayList<GameState> gameStates;
 		//index of the game state in list
 		private int currentState;
-		//Game states
+		//Game states Enums
 		public static final int MENUSTATE =  0;
 		public static final int LEVEL1 =  1;
 		public static final int LEVEL2 =  2;

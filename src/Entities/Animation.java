@@ -6,15 +6,14 @@ import java.awt.image.BufferedImage;
 public class Animation {
 	//Array for all animations
 	private BufferedImage[] frames;
-	private int currentFrame;
 	
+	private int currentFrame;
 	private long startTime;
 	private long delay;
-	
 	private boolean playedOnce;
 	
 	//Constructor
-	public void Animiation()
+	public Animation()
 	{
 		playedOnce = false;
 	}

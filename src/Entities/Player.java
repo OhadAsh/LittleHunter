@@ -22,8 +22,7 @@ public class Player extends MapObject {
 	private boolean firing;
 	private int ArrowCost;
 	private int ArrowDMG;
-	
-	//private arraylist<arrows> arrows
+	private ArrayList<Arrow> Arrows;
 	
 	//Sword
 	private boolean Attack;
@@ -69,7 +68,7 @@ public class Player extends MapObject {
 		Ammo = MaxAmmo = 30;
 		ArrowCost = 1;
 		ArrowDMG = 5;
-		//Arrow = new Array<Arrows>();
+		Arrows = new ArrayList<Arrow>();
 	
 		AttackDMG = 9;
 		AttackRNG = 40;
@@ -79,13 +78,13 @@ public class Player extends MapObject {
 		{
 			BufferedImage spritesheet = ImageIO.read(
 					getClass().getResourceAsStream
-					("/Sprites/Player/LittleHunter.gif"));
+					("/Sprites/Player/LittleHunter.png"));
 			
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 6; i++)
 			{
 				BufferedImage[] bi = new BufferedImage[numFrames[i]];
-				//Read individual sprites from sheet
+				//Read individual sprite from sprite sheet
 				for(int j = 0; j < numFrames[i]; j++)
 				{
 					if(i != 4) {
@@ -185,8 +184,6 @@ public class Player extends MapObject {
 		{
 			dy += fallspeed;
 			if(dy > 0 ) jump = false;
-			//The longer you hold the jump button the higher you jump
-			//if(dy < 0 && !jump) dy += stopjumpstart;
 			if(dy > maxfallspeed) dy = maxfallspeed;
 		}
 	}
@@ -198,6 +195,51 @@ public class Player extends MapObject {
 		GetNextPosition();
 		CheckTileMapColl();
 		setposition(Xtemp, Ytemp);
+		
+		//Check attack has stopped
+		if(curretAction == SWORD)
+		{
+			if(animation.HasPlayedOnce()) 
+			{
+				Attack = false;
+			}
+		}
+		if(curretAction == BOW)
+		{
+			if(animation.HasPlayedOnce()) 
+			{
+				firing = false;
+			}
+		}
+		
+		//Arrow attack
+		if(Ammo > MaxAmmo)
+		{
+			Ammo = MaxAmmo;
+		}
+		if(firing && curretAction != BOW)
+		{
+			//Checks if there is enough ammo to shoot arrow
+			if (Ammo > 0)
+			{
+				Ammo -= ArrowCost;
+				Arrow AA = new Arrow(tilemap, faceright);
+				//Set in the same player tile
+				AA.setposition(x, y);
+				Arrows.add(AA);
+			}
+		}
+		
+		//Update Arrow movement across map tiles
+		for(int i = 0; i < Arrows.size(); i++)
+		{
+			Arrows.get(i).update();
+			if(Arrows.get(i).RemoveArrow())
+			{
+				Arrows.remove(i);
+				i--;
+			}
+		}
 		
 		//SetAnimation
 		if(Attack)
@@ -216,7 +258,7 @@ public class Player extends MapObject {
 			{
 				curretAction = BOW;
 				animation.setFrames(sprites.get(BOW));
-				animation.setDelay(35);
+				animation.setDelay(20);
 				width = 42;
 			}
 		}
@@ -264,14 +306,21 @@ public class Player extends MapObject {
 		animation.update();
 		//Set direction of player standing
 		if(curretAction != SWORD && curretAction != BOW)
+		{
 			if(right) faceright = true;
 			if(left) faceright = false;
+		}
 	}
 	
 	//Draws object of 2D to screen
 	public void draw(Graphics2D g)
 	{
 		setMapPosition();
+		//Draw Arrows
+		for(int i = 0; i < Arrows.size(); i++) 
+		{
+			Arrows.get(i).draw(g);
+		}
 		
 		//Draw player
 		if(flinch)

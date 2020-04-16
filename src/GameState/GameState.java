@@ -1,6 +1,6 @@
 package GameState;
 
-// we don't want anyone to use this class just to extend out of it
+//Superclass game state, we don't want anyone to use this class just to extend out of it
 public abstract class GameState 
 {
 	protected GameStateManager gsm;
