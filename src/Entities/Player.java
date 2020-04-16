@@ -236,7 +236,7 @@ public class Player extends MapObject {
 			{
 				curretAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
-				animation.setDelay(200);
+				animation.setDelay(100);
 				width = 30;
 			}
 		}

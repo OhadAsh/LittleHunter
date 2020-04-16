@@ -26,7 +26,7 @@ public class LEVEL1 extends GameState
 	{
 		//Constructor
 		tileMap = new TileMap(30);
-		tileMap.loadTiles("/Tilesets/grasstileset.gif");
+		tileMap.loadTiles("/Tilesets/grasstileset.png");
 		tileMap.loadMap("/Maps/level1-1.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setMapCam(1);

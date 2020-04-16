@@ -81,6 +81,7 @@ public class TileMap
 	}
 	
 	//Function that loads the map tiles from memory
+	@SuppressWarnings("resource")
 	public void loadMap(String s)
 	{
 		try {
