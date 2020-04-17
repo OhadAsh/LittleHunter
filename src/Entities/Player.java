@@ -51,7 +51,7 @@ public class Player extends MapObject {
 		width = 30;
 		height = 30;
 		cwidth =  20;
-		cheight = 20;
+		cheight = 30;
 		
 		//Physic variables 
 		movespeed = 0.3;
@@ -78,7 +78,7 @@ public class Player extends MapObject {
 		{
 			BufferedImage spritesheet = ImageIO.read(
 					getClass().getResourceAsStream
-					("/Sprites/Player/LittleHunter.png"));
+					("/Sprites/Player/LittleHunter.gif"));
 			
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 6; i++)
@@ -116,7 +116,7 @@ public class Player extends MapObject {
 	public int getHP() { return HP; }
 	public int getMaxHP() { return MaxHP; }
 	public int getAmmo() { return Ammo; }
-	public int MaxAmmo() { return MaxAmmo; }
+	public int getMaxAmmo() { return MaxAmmo; }
 	
 	//Keyboard Input
 	public void SetFiring()
@@ -167,7 +167,7 @@ public class Player extends MapObject {
 				}
 			}
 		}
-		//cannot move while attacking
+		//cannot move while attacking except in air which is ok
 		if((curretAction == SWORD || curretAction == BOW) &&
 		!(jump || fall))
 		{
@@ -331,15 +331,7 @@ public class Player extends MapObject {
 				return;
 			}
 		}
-		//Drawing sprite right or left depends on player action
-		if(faceright)
-		{
-			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2), (int)(y + ymap - height / 2), null);
-		}
-		else
-		{
-			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2 + width), (int)(y + ymap - height / 2), -width, height, null);
-		}
+		super.draw(g);
 	}
 
 }

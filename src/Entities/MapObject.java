@@ -240,4 +240,17 @@ public abstract class MapObject {
 				y + ymap + height < 0 ||
 				y + ymap - height > GamePanel.HEIGHT; 
 	}
+	
+	public void draw(java.awt.Graphics2D g)
+	{
+		//Drawing sprite right or left depends on object action
+		if(faceright)
+		{
+			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2), (int)(y + ymap - height / 2), null);
+		}
+		else
+		{
+			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2 + width), (int)(y + ymap - height / 2), -width, height, null);
+		}
+	}
 }

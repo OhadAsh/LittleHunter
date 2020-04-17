@@ -40,7 +40,7 @@ public class Arrow extends MapObject{
 		try 
 		{
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream(
-					"/Sprites/Player/Arrow.png"));
+					"/Sprites/Player/Arrow.gif"));
 			RegSprite = new BufferedImage[4];
 			for(int i = 0; i < RegSprite.length; i++)
 			{
@@ -108,15 +108,7 @@ public class Arrow extends MapObject{
 	public void draw(Graphics2D g)
 	{
 		setMapPosition();
-		
-		if(faceright)
-		{
-			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2), (int)(y + ymap - height / 2), null);
-		}
-		else
-		{
-			g.drawImage(animation.getImage(), (int)(x + xmap - width / 2 + width), (int)(y + ymap - height / 2), -width, height, null);
-		}
+		super.draw(g);
 	}
 	
 }
