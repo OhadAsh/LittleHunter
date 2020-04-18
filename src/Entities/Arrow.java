@@ -47,7 +47,7 @@ public class Arrow extends MapObject{
 				RegSprite[i] = spritesheet.getSubimage(i * width, 0, width, height);
 			}
 			
-			//Currently 0 there is not animation ready for this
+			//DEVELOPMENT CURRENTLY 0 THERE IS NO ANIMATION READY FOR THIS
 			//Just in order to work for now
 			HitSprite = new BufferedImage[0];
 			for(int i = 0; i < HitSprite.length; i++)
@@ -74,8 +74,9 @@ public class Arrow extends MapObject{
 			return;
 		}
 		hit = true;
-		animation.setFrames(HitSprite);
-		animation.setDelay(70);
+		//No animation yet for arrwo hit
+		//animation.setFrames(HitSprite);
+		//animation.setDelay(70);
 		dx = 0;
 	}
 	

@@ -16,6 +16,7 @@ public class Mushroom extends Enemy{
 	public Mushroom(TileMap tm)
 	{
 		super(tm);
+		
 		movespeed =  0.3;
 		maxspeed = 0.3;
 		fallspeed = 0.2;
@@ -47,7 +48,7 @@ public class Mushroom extends Enemy{
 		}
 		animation = new Animation();
 		animation.setFrames(sprites);
-		animation.setDelay(200);
+		animation.setDelay(135);
 		
 		right  = true;
 		faceright = true;
@@ -113,7 +114,8 @@ public class Mushroom extends Enemy{
 	
 	public void draw(Graphics2D g)
 	{
-		if(NotOnScreenObj()) return;
+		//BUG not working accordingly
+		//if(NotOnScreenObj()) return;
 		
 		setMapPosition();
 		

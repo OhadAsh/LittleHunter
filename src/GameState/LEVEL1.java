@@ -10,8 +10,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-
-
 public class LEVEL1 extends GameState 
 {
 	private TileMap tileMap;
@@ -44,13 +42,31 @@ public class LEVEL1 extends GameState
 		//Sets position of player in level 1
 		player.setposition(60 ,195);
 		
-		enemies = new ArrayList<Enemy>();
-		Mushroom m;
-		m = new Mushroom(tileMap);
-		m.setposition(60, 100);
-		enemies.add(m);
+		PopulateEnemies();
 		
 		hud = new HUD(player);
+	}
+	
+	private void PopulateEnemies()
+	{
+		enemies = new ArrayList<Enemy>();
+		Mushroom m;
+		//Java array of points with coordination to spawn enemies on map
+		Point[] points = new Point[]
+		{
+			new Point(860, 190),
+			new Point(1525, 190),
+			new Point(1680, 190),
+			new Point(1800, 190),
+		};
+		
+		//For to go through points array and add enemies on map
+		for(int i = 0; i < points.length; i++)
+		{
+			m = new Mushroom(tileMap);
+			m.setposition(points[i].x, points[i].y);
+			enemies.add(m);
+		}
 	}
 	
 	public void update() 
@@ -66,11 +82,20 @@ public class LEVEL1 extends GameState
 		//Moving background
 		bg.setPosition(tileMap.getx(), tileMap.gety());
 		
-		//Update enemy 
+		//Check if Player attacks enemy
+		player.CheckAttack(enemies);
+		
+		//Update enemies on map
 		for(int i = 0; i < enemies.size(); i++)
 		{
 			enemies.get(i).update();
+			if(enemies.get(i).isDead())
+			{
+				enemies.remove(i);
+				i--;
+			}
 		}
+		
 		
 	}
 	

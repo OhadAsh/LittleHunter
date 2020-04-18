@@ -228,9 +228,10 @@ public abstract class MapObject {
 	//Set action of the object
 	public void SetLeft(boolean b) { left = b; }
 	public void SetRight(boolean b) { right = b; }
-	public void SetUp(boolean b) { up = b; }
-	public void SetDown(boolean b) { down = b; }
 	public void SetJump(boolean b) { jump = b; }
+	//No need for now
+	//public void SetUp(boolean b) { up = b; }
+	//public void SetDown(boolean b) { down = b; }
 	
 	//Function to know if object is needed to be drawn on map or not
 	public boolean NotOnScreenObj()

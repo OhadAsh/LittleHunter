@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class Player extends MapObject {
 
-	//Player Inventory
+	//Player Inventory variables
 	private int HP;
 	private int MaxHP;
 	private int Ammo;
@@ -18,20 +18,20 @@ public class Player extends MapObject {
 	private boolean flinch;
 	private long flinchTimer;
 	
-	//Arrows
+	//Arrows variables
 	private boolean firing;
 	private int ArrowCost;
 	private int ArrowDMG;
 	private ArrayList<Arrow> Arrows;
 	
-	//Sword
+	//Sword variables
 	private boolean Attack;
 	private int AttackDMG;
 	private int AttackRNG;
 	
 	//Animation
 	private ArrayList<BufferedImage[]> sprites;
-	//Array of sprite littleHunter
+	//Array of sprite sheet littleHunter
 	private final int[] numFrames = { 4, 6, 3, 2, 6, 6};
 	private int curretAction;
 	//Animation actions, Enums for knowing which index of Animation were on
@@ -73,7 +73,7 @@ public class Player extends MapObject {
 		AttackDMG = 9;
 		AttackRNG = 40;
 		
-		//load sprite onto game 
+		//Load player sprite onto game 
 		try 
 		{
 			BufferedImage spritesheet = ImageIO.read(
@@ -118,12 +118,11 @@ public class Player extends MapObject {
 	public int getAmmo() { return Ammo; }
 	public int getMaxAmmo() { return MaxAmmo; }
 	
-	//Keyboard Input
+	//Setter for Keyboard Input
 	public void SetFiring()
 	{
 		firing = true;
 	}
-	
 	public void SetAttacking()
 	{
 		Attack = true;
@@ -167,7 +166,7 @@ public class Player extends MapObject {
 				}
 			}
 		}
-		//cannot move while attacking except in air which is ok
+		//Cannot move while attacking except in air which is OK
 		if((curretAction == SWORD || curretAction == BOW) &&
 		!(jump || fall))
 		{
@@ -186,6 +185,71 @@ public class Player extends MapObject {
 			if(dy > 0 ) jump = false;
 			if(dy > maxfallspeed) dy = maxfallspeed;
 		}
+	}
+	
+	//Function that checks if player attacks enemy entity's
+	public void CheckAttack(ArrayList<Enemy> enemies)
+	{
+		//Loop through array of enemies 
+		for(int i = 0; i < enemies.size(); i++)
+		{
+			Enemy e = enemies.get(i);
+			//Check if sword attack hits enemy
+			if(Attack)
+			{
+				if(faceright)
+				{
+					//Checks if enemy that is to the right of us is being hit by sword attack
+					if(e.getx() > x &&
+							e.getx() < x + AttackRNG &&
+							e.gety() > y - height / 2 &&
+							e.gety() < y + height / 2)
+					{
+						e.hit(AttackDMG);
+					}
+				}
+				else
+				{
+					//Checks if enemy that is to the left of us is being hit by sword attack
+					if(e.getx() < x &&
+							e.getx() > x - AttackRNG &&
+							e.gety() > y - height / 2 &&
+							e.gety() < y + height / 2)
+					{
+						e.hit(AttackDMG);
+					}
+				}
+			}
+			//Check if Bow attack hits enemy
+			//need for loop in order to check active arrows that are still on map
+			for(int j = 0; j < Arrows.size(); j++)
+			{
+				if(Arrows.get(j).intersects(e))
+				{
+					e.hit(ArrowDMG);
+					//if arrow hit arrow disappear
+					Arrows.get(j).SetHit();
+					break;
+				}
+			}	
+			
+			//Check for enemy collision
+			if(intersects(e))
+			{
+				hit(e.getDMG());
+			}
+		}		
+	}
+	
+	//Damage to player when hit
+	public void hit(int DMG)
+	{
+		if(flinch) return;
+		HP -= 1;
+		if(HP < 0) HP = 0;
+		if(HP == 0) Dead = true;
+		flinch = true;
+		flinchTimer = System.nanoTime();
 	}
 	
 	//Updates drawing of player on screen
@@ -212,7 +276,7 @@ public class Player extends MapObject {
 			}
 		}
 		
-		//Arrow attack
+		//Bow attack, Checking if there enough arrows in player inventory.
 		if(Ammo > MaxAmmo)
 		{
 			Ammo = MaxAmmo;
@@ -241,7 +305,18 @@ public class Player extends MapObject {
 			}
 		}
 		
-		//SetAnimation
+		//Check if flinch is done
+		if(flinch)
+		{
+			long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
+			if (elapsed > 1000)
+			{
+				flinch = false;
+			}
+		}
+		
+		//TO FIX BUG WITH COMBINATION OF ATTACKS BOW & SWORD MAKE IT A SKILL AND CHANGE TO SWITCH CASE CODE!!!!!
+		//SetAnimation for all player positions
 		if(Attack)
 		{
 			if(curretAction != SWORD)
