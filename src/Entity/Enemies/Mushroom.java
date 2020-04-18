@@ -34,7 +34,7 @@ public class Mushroom extends Enemy{
 		try
 		{
 			BufferedImage spritesheet = ImageIO.read(
-					getClass().getResourceAsStream("/Sprites/Enemies/Mush.gif"));
+					getClass().getResourceAsStream("/Sprites/Enemies/Mush.png"));
 				sprites = new BufferedImage[7];
 				for(int i = 0; i < sprites.length; i++)
 				{

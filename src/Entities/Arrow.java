@@ -19,7 +19,7 @@ public class Arrow extends MapObject{
 		super(tm);
 		
 		faceright = right;
-		movespeed = 3.8;
+		movespeed = 5.5;
 		
 		//Sets the move direction of arrow
 		if(right)
@@ -40,7 +40,7 @@ public class Arrow extends MapObject{
 		try 
 		{
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream(
-					"/Sprites/Player/Arrow.gif"));
+					"/Sprites/Player/Arrow.png"));
 			RegSprite = new BufferedImage[4];
 			for(int i = 0; i < RegSprite.length; i++)
 			{

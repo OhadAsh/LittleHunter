@@ -32,7 +32,7 @@ public class Player extends MapObject {
 	//Animation
 	private ArrayList<BufferedImage[]> sprites;
 	//Array of sprite littleHunter
-	private final int[] numFrames = { 4, 6, 3, 2, 8, 7};
+	private final int[] numFrames = { 4, 6, 3, 2, 6, 6};
 	private int curretAction;
 	//Animation actions, Enums for knowing which index of Animation were on
 	private static final int IDLE = 0;
@@ -78,7 +78,7 @@ public class Player extends MapObject {
 		{
 			BufferedImage spritesheet = ImageIO.read(
 					getClass().getResourceAsStream
-					("/Sprites/Player/LittleHunter.gif"));
+					("/Sprites/Player/LittleHunter.png"));
 			
 			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 6; i++)
@@ -94,7 +94,7 @@ public class Player extends MapObject {
 					else
 					{
 						bi[j] = spritesheet.getSubimage
-								((j * width) + 12, i* height, width, height);
+								((j * width) + 10, i* height, width + 2, height);
 					}
 				}
 				sprites.add(bi);
@@ -249,7 +249,7 @@ public class Player extends MapObject {
 				curretAction = SWORD;
 				animation.setFrames(sprites.get(SWORD));
 				animation.setDelay(35);
-				width = 42;
+				width = 30;
 			}
 		}
 		else if(firing)
@@ -258,8 +258,8 @@ public class Player extends MapObject {
 			{
 				curretAction = BOW;
 				animation.setFrames(sprites.get(BOW));
-				animation.setDelay(20);
-				width = 42;
+				animation.setDelay(35);
+				width = 30;
 			}
 		}
 		else if(dy > 0)
