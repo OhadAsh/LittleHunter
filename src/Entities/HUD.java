@@ -32,7 +32,7 @@ public class HUD {
 		g.drawImage(image, 0, 20, null);
 		g.setFont(font);
 		g.setColor(Color.BLACK);
-		g.drawString(player.getHP() + "/" + player.getMaxHP(),40 , 35);
+		g.drawString(player.getHP() + "HP" ,45 , 35);
 		g.drawString(player.getAmmo() + "/" + player.getMaxAmmo(), 40, 55);
 	}
 	

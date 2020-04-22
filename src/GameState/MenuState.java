@@ -19,6 +19,8 @@ public class MenuState extends GameState
 	private Color titleColor;
 	private Font titleFont;
 	private Font font;
+	
+	//Constructor
 	public MenuState(GameStateManager gsm)
 	{
 	this.gsm = gsm;
@@ -35,12 +37,16 @@ public class MenuState extends GameState
 	
 	}
 	
-	//abstract methods
+	//Abstract methods
 	public void init(){}
+	
+	//Update screen
 	public void update()
 	{
 		bg.update();
 	}
+	
+	//Draw to screen 
 	public void draw(Graphics2D g)
 	{
 		//draw background

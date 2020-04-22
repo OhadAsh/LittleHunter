@@ -14,7 +14,7 @@ public class GameStateManager
 		//Game states Enums
 		public static final int MENUSTATE =  0;
 		public static final int LEVEL1 =  1;
-		public static final int LEVEL2 =  2;
+		public static final int DEADEND = 2;
 		//Constructor
 		public GameStateManager()
 		{
@@ -22,6 +22,7 @@ public class GameStateManager
 			currentState = MENUSTATE;
 			gameStates.add(new MenuState(this));
 			gameStates.add(new LEVEL1(this));
+			gameStates.add(new DeadEnd(this));
 		}
 		
 		public void setstate(int i)

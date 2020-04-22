@@ -5,7 +5,6 @@ import TileMap.*;
 import Entities.*;
 import Entity.Enemies.Mushroom;
 import Main.GamePanel;
-import Entity.Enemies.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class LEVEL1 extends GameState
 	//initializing tile map and level 1 stuff
 	public void init() 
 	{
-		//Constructor
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/Tilesets/grasstileset.png");
 		tileMap.loadMap("/Maps/level1-1.map");
@@ -39,9 +37,9 @@ public class LEVEL1 extends GameState
 		
 		bg = new Background("/Backgrounds/forrest1.gif", 0.1);
 		player = new Player(tileMap);
+		player.SetHP(2);
 		//Sets position of player in level 1
-		player.setposition(60 ,195);
-		
+		player.setposition(80 ,195);
 		PopulateEnemies();
 		
 		hud = new HUD(player);
@@ -69,10 +67,43 @@ public class LEVEL1 extends GameState
 		}
 	}
 	
+	//Checks player position if he falls to a pit he goes back to last jump of map
+	public void CheckFallPos()
+	{
+		if(player.gety() > 210 )
+		{
+			if(player.getx() > 2000 )
+			{
+				player.setposition(1950 ,60);
+				player.hit(1);
+			}
+			else if(player.getx() > 950 )
+			{
+				player.setposition(1150 ,60);
+				player.hit(1);
+			}
+			else if(player.getx() > 400 )
+			{
+				player.setposition(450 ,60);
+				player.hit(1);
+			}	
+		}
+	}
+	
+	//Checks if player died in level
+	public void CheckIFDied()
+	{
+		if(player.getHP() == 0)
+		{
+			gsm.setstate(GameStateManager.DEADEND);
+		}
+	}
+	
 	public void update() 
 	{
 		//update player
 		player.update();
+		CheckFallPos();
 		//Sets camera around player
 		tileMap.setPosition(GamePanel.WIDTH / 2 - player.getx(), 
 				GamePanel.HEIGHT / 2 - player.gety()
@@ -84,7 +115,6 @@ public class LEVEL1 extends GameState
 		
 		//Check if Player attacks enemy
 		player.CheckAttack(enemies);
-		
 		//Update enemies on map
 		for(int i = 0; i < enemies.size(); i++)
 		{
@@ -95,8 +125,7 @@ public class LEVEL1 extends GameState
 				i--;
 			}
 		}
-		
-		
+		CheckIFDied();
 	}
 	
 	//Draw stage to game panel

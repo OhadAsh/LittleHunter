@@ -4,6 +4,7 @@ package Entities;
 import TileMap.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import GameState.GameStateManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -46,7 +47,6 @@ public class Player extends MapObject {
 	public Player(TileMap tm)
 	{
 		super(tm);
-		
 		//For reading sprite sheet
 		width = 30;
 		height = 30;
@@ -64,7 +64,8 @@ public class Player extends MapObject {
 		
 		faceright = true;
 		
-		HP = MaxHP = 3;
+		HP = 1;
+		MaxHP = 20;
 		Ammo = MaxAmmo = 30;
 		ArrowCost = 1;
 		ArrowDMG = 5;
@@ -126,6 +127,11 @@ public class Player extends MapObject {
 	public void SetAttacking()
 	{
 		Attack = true;
+	}
+	//Setter for HP
+	public void SetHP( int i)
+	{
+		HP += i;
 	}
 	
 	//Function that determines where the next position of the player is by reading keyboard input
@@ -245,9 +251,14 @@ public class Player extends MapObject {
 	public void hit(int DMG)
 	{
 		if(flinch) return;
-		HP -= 1;
+		HP -= DMG;
 		if(HP < 0) HP = 0;
-		if(HP == 0) Dead = true;
+		if(HP == 0) 
+		{
+			Dead = true;
+		}
+		//jump when hit
+		//dy = -3;
 		flinch = true;
 		flinchTimer = System.nanoTime();
 	}
@@ -408,5 +419,6 @@ public class Player extends MapObject {
 		}
 		super.draw(g);
 	}
+
 
 }

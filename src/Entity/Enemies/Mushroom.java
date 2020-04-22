@@ -26,7 +26,7 @@ public class Mushroom extends Enemy{
 		width = 30;
 		height =  40;
 		cwidth = 30;
-		cheight = 40;
+		cheight = 20;
 		
 		HP = MaxHP = 2;
 		DMG = 1;
