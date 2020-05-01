@@ -1,9 +1,9 @@
 package GameState;
 
-import Main.GamePanel;
+
 import TileMap.Background;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import Handlers.KeyHandler;
 
 public class DeadEnd extends GameState 
 {
@@ -30,6 +30,8 @@ public class DeadEnd extends GameState
 	}
 	public void update()
 	{
+		//Key handle update
+		handleInput();
 	}
 	public void draw(Graphics2D g)
 	{
@@ -38,14 +40,13 @@ public class DeadEnd extends GameState
 	}
 
 	//Key functions at menu window
-	public void keyPressed(int k)
-	{
-		if (k== KeyEvent.VK_ESCAPE) {
-			Runtime.getRuntime().exit(0);
+	public void handleInput() {
+		if(KeyHandler.isPressed(KeyHandler.ESCAPE)) 
+		{
+			System.exit(0);
 		}
-		if (k== KeyEvent.VK_ENTER) {
+		if(KeyHandler.isPressed(KeyHandler.ENTER)) {
 			gsm.setstate(GameStateManager.MENUSTATE);
+			}
 		}
-	}	
-	public void keyRelesed(int k){}
-}
+	}

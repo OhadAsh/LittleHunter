@@ -3,7 +3,7 @@ package GameState;
 
 import TileMap.Background;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import Handlers.KeyHandler;
 
 public class MenuState extends GameState
 {
@@ -44,6 +44,8 @@ public class MenuState extends GameState
 	public void update()
 	{
 		bg.update();
+		//Key handle update
+		handleInput();
 	}
 	
 	//Draw to screen 
@@ -70,37 +72,34 @@ public class MenuState extends GameState
 			g.drawString(options[i], 145, 140+i * 15);
 		}
 	}
+	
 	private void select () {
 		if (currentChoise == 0)
 		{
 			gsm.setstate(GameStateManager.LEVEL1);
 		}
-		if (currentChoise == 1) 
-		{
+		else if(currentChoise == 1) {
 			System.exit(0);
 		}
 	}
 	
 	//Key functions at menu window
-	public void keyPressed(int k)
-	{
-		if (k== KeyEvent.VK_ENTER) {
-			select();
-		}
-		if (k== KeyEvent.VK_UP) {
-			currentChoise--;
-			if(currentChoise == -1) 
+	public void handleInput() {
+		if(KeyHandler.isPressed(KeyHandler.ENTER)) select();
+		if(KeyHandler.isPressed(KeyHandler.UP)) 
+		{
+			if(currentChoise > 0) 
 			{
-			currentChoise = options.length -1;
+				currentChoise--;
 			}
 		}
-		if (k== KeyEvent.VK_DOWN) {
-			currentChoise++;
-			if(currentChoise == options.length) 
+		if(KeyHandler.isPressed(KeyHandler.DOWN)) 
+		{
+			if(currentChoise < options.length - 1) 
 			{
-			currentChoise = 0;
+				currentChoise++;
 			}
 		}
 	}
-	public void keyRelesed(int k){}
+	
 }

@@ -4,8 +4,10 @@ package Main;
 import java.awt.*; // needed for window dimensions 
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import GameState.GameStateManager;
+import Handlers.KeyHandler;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 	public void update() 
 	{
 		gsm.update();
+		KeyHandler.update();
 	}
 	// draws the game onto an off-screen buffered image
 	public void draw() 
@@ -104,14 +107,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener
 		g2.dispose();
 	}
 	
-	
 	public void keyTyped(KeyEvent key) {}
 	public void keyPressed(KeyEvent key) 
 	{
-		gsm.keyPressed(key.getKeyCode());
+		KeyHandler.keySet(key.getKeyCode(), true);
 	}
 	public void keyReleased(KeyEvent key) 
 	{
-		gsm.keyRelesed(key.getKeyCode());
+		KeyHandler.keySet(key.getKeyCode(), false);
 	}
 }

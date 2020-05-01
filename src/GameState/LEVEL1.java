@@ -4,9 +4,9 @@ package GameState;
 import TileMap.*;
 import Entities.*;
 import Entity.Enemies.Mushroom;
+import Handlers.KeyHandler;
 import Main.GamePanel;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class LEVEL1 extends GameState 
@@ -72,7 +72,7 @@ public class LEVEL1 extends GameState
 	{
 		if(player.gety() > 210 )
 		{
-			if(player.getx() > 2000 )
+			if(player.getx() > 1900 )
 			{
 				player.setposition(1950 ,60);
 				player.hit(1);
@@ -101,6 +101,8 @@ public class LEVEL1 extends GameState
 	
 	public void update() 
 	{
+		//Key handle update
+		handleInput();
 		//update player
 		player.update();
 		CheckFallPos();
@@ -150,18 +152,12 @@ public class LEVEL1 extends GameState
 		hud.draw(g);
 		
 	}
-	public void keyPressed(int k) 
-	{
-		if(k == KeyEvent.VK_LEFT) player.SetLeft(true);
-		if(k == KeyEvent.VK_RIGHT) player.SetRight(true);
-		if(k == KeyEvent.VK_SPACE) player.SetJump(true);
-		if(k == KeyEvent.VK_S) player.SetAttacking();
-		if(k == KeyEvent.VK_D) player.SetFiring();
-	}
-	public void keyRelesed(int k) 
-	{
-		if(k == KeyEvent.VK_LEFT) player.SetLeft(false);
-		if(k == KeyEvent.VK_RIGHT) player.SetRight(false);
-		if(k == KeyEvent.VK_SPACE) player.SetJump(false);
+	
+	public void handleInput() {
+		player.SetLeft(KeyHandler.keyState[KeyHandler.LEFT]);
+		player.SetRight(KeyHandler.keyState[KeyHandler.RIGHT]);
+		player.SetJump(KeyHandler.keyState[KeyHandler.SPACE]);
+		if(KeyHandler.isPressed(KeyHandler.BUTTON1)) player.SetAttacking();
+		if(KeyHandler.isPressed(KeyHandler.BUTTON2)) player.SetFiring();
 	}
 }
