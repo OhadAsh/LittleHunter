@@ -20,6 +20,7 @@ public class GameStateManager
 		public static final int WINEND = 4;
 		public static final int DEADEND = 5;
 		public static final int SCOREBOARD = 6;
+		public static final int INFO = 7;
 		
 		//Constructor
 		public GameStateManager()
@@ -43,7 +44,9 @@ public class GameStateManager
 			else if(state == DEADEND)
 				gameStates[state] = new DeadEnd(this);
 			else if(state == SCOREBOARD)
-				gameStates[state] = new ScoreBoard(this);	
+				gameStates[state] = new ScoreBoard(this);
+			else if(state == INFO)
+				gameStates[state] = new Info(this);	
 		}
 		
 		private void unloadState(int state) {

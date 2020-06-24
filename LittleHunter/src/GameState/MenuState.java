@@ -14,6 +14,7 @@ public class MenuState extends GameState
 		{
 		"Play",
 		"Scoreboard",
+		"Info",
 		"Exit"
 		};
 	
@@ -77,12 +78,15 @@ public class MenuState extends GameState
 	private void select () {
 		if (currentChoise == 0)
 		{
-			gsm.setstate(GameStateManager.LEVEL3);
+			gsm.setstate(GameStateManager.LEVEL1);
 		}
 		else if(currentChoise == 1) {
 			gsm.setstate(GameStateManager.SCOREBOARD);
 		}
 		else if(currentChoise == 2) {
+			gsm.setstate(GameStateManager.INFO);
+		}
+		else if(currentChoise == 3) {
 			System.exit(0);
 		}
 	}

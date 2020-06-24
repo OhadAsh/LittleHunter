@@ -65,7 +65,7 @@ public class ScoreBoard extends GameState
 		g.drawString("ScoreBoard" ,120 , 35);
 		g.setFont(font);
 		g.setColor(Color.BLACK);
-		g.drawString("Press Enter for Menu", 100, 210);
+		g.drawString("Press Enter for Menu", 110, 210);
 		DrawScore(g);
 	}
 	//Key functions at ScoreBoard window
