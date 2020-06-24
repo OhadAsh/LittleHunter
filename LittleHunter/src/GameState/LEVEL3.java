@@ -3,7 +3,6 @@ package GameState;
 
 import TileMap.*;
 import Entities.*;
-import Entity.Enemies.Ghost;
 import Entity.Enemies.Goblin;
 import Entity.Enemies.Skeleton;
 import Handlers.KeyHandler;
