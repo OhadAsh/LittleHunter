@@ -27,7 +27,7 @@ public class MenuState extends GameState
 	this.gsm = gsm;
 	try {
 		//Resource folder
-		bg = new Background("/Backgrounds/menubg.gif", 1);
+		bg = new Background("/Backgrounds/menubg.png", 1);
 		titleColor = new Color(250, 145, 25);
 		titleFont = new Font("Caliberi", Font.BOLD, 26);
 		font = new Font("Arial", Font.ROMAN_BASELINE, 14);
@@ -77,7 +77,7 @@ public class MenuState extends GameState
 	private void select () {
 		if (currentChoise == 0)
 		{
-			gsm.setstate(GameStateManager.LEVEL1);
+			gsm.setstate(GameStateManager.LEVEL3);
 		}
 		else if(currentChoise == 1) {
 			gsm.setstate(GameStateManager.SCOREBOARD);

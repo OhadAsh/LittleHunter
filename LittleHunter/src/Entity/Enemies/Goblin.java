@@ -27,7 +27,7 @@ public class Goblin extends Enemy{
 		cwidth = 30;
 		cheight = 30;
 		
-		HP = MaxHP = 35;
+		HP = MaxHP = 40;
 		DMG = 4;
 		
 		//Load enemy sprite sheet
