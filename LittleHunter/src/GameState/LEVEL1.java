@@ -108,7 +108,7 @@ public class LEVEL1 extends GameState
 	
 	public void CheckIFWon()
 	{
-		if(enemies.size() == 0)
+		if(player.getx() > 2400 )
 		{
 			gsm.setstate(GameStateManager.LEVEL2);
 		}
