@@ -14,10 +14,9 @@ public class Player extends MapObject {
 	private int MaxHP;
 	private int Ammo;
 	private int MaxAmmo;
-	private boolean Dead;
+	public boolean Dead;
 	private boolean flinch;
 	private long flinchTimer;
-	private int score;
 	
 	//Arrows variables
 	private boolean firing;
@@ -118,7 +117,6 @@ public class Player extends MapObject {
 	public int getMaxHP() { return MaxHP; }
 	public int getAmmo() { return Ammo; }
 	public int getMaxAmmo() { return MaxAmmo; }
-	public int getScore() { return score; }
 	
 	//Setter for Keyboard Input
 	public void SetFiring()
@@ -252,12 +250,16 @@ public class Player extends MapObject {
 		}		
 	}
 	
+	//For JUnit Testing
 	//Damage to player when hit
 	public void hit(int DMG)
 	{
 		if(flinch) return;
 		HP -= DMG;
-		if(HP < 0) HP = 0;
+		if(HP < 0) 
+		{
+			HP = 0;
+		}
 		if(HP == 0) 
 		{
 			Dead = true;
@@ -266,6 +268,15 @@ public class Player extends MapObject {
 		flinchTimer = System.nanoTime();
 	}
 	
+	//For JUnit Testing
+	public void AmmoCost()
+	{
+		Ammo -= ArrowCost;
+		Arrow AA = new Arrow(tilemap, faceright);
+		//Set in the same player tile
+		AA.setposition(x, y);
+		Arrows.add(AA);
+	}
 	//Updates drawing of player on screen
 	public void update()
 	{
@@ -290,7 +301,7 @@ public class Player extends MapObject {
 			}
 		}
 		
-		//Bow attack, Checking if there enough arrows in player inventory.
+		//Bow attack, Checking if there is enough arrows in player inventory.
 		if(Ammo > MaxAmmo)
 		{
 			Ammo = MaxAmmo;
@@ -300,11 +311,7 @@ public class Player extends MapObject {
 			//Checks if there is enough ammo to shoot arrow
 			if (Ammo > 0)
 			{
-				Ammo -= ArrowCost;
-				Arrow AA = new Arrow(tilemap, faceright);
-				//Set in the same player tile
-				AA.setposition(x, y);
-				Arrows.add(AA);
+				AmmoCost();
 			}
 		}
 		

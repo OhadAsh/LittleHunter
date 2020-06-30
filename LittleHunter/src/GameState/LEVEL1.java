@@ -101,7 +101,7 @@ public class LEVEL1 extends GameState
 		if(player.getHP() == 0)
 		{
 			hud.SM.GameScoreEvent();
-			hud.SM.ResetScore(0);
+			hud.SM.ResetScore();
 			gsm.setstate(GameStateManager.DEADEND);
 		}
 	}

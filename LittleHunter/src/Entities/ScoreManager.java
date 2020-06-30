@@ -74,13 +74,11 @@ public class ScoreManager
   	{
 		score += Snum; 
 	}
-  public void ResetScore(int n)
+  public void ResetScore()
   {
-	  score = n;  
+	  score = 0;  
   }
 
-
-  
   public void writeScore() {
     List<PlayerScore> scores = getScores();
     PlayerScore PS = new PlayerScore(playerName, score);

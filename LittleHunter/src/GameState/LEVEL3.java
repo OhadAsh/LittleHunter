@@ -99,7 +99,7 @@ public class LEVEL3 extends GameState
 		if(player.getHP() == 0)
 		{
 			hud.SM.GameScoreEvent();
-			hud.SM.ResetScore(0);
+			hud.SM.ResetScore();
 			gsm.setstate(GameStateManager.DEADEND);
 		}
 	}
@@ -110,7 +110,7 @@ public class LEVEL3 extends GameState
 		{
 			SM.increaseScore(5000);
 			hud.SM.GameScoreEvent();
-			hud.SM.ResetScore(0);
+			hud.SM.ResetScore();
 			gsm.setstate(GameStateManager.WINEND);
 		}
 	}
