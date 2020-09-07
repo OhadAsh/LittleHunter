@@ -1,0 +1,8 @@
+Software project in JAVA for HiT, This project included classes that represent MVC architecture.
+Model: GameStateManager, ScoreManager, TileMap
+View: Entities, GameState
+Controller: KeyHandler
+
+Design patterns were a requirement for this project, and were used also
+Factory: Enemy, GameState
+Singleton: Player
